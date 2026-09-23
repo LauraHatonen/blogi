@@ -31,7 +31,7 @@ stage('Nikto') {
                  sh '''
                     docker run --rm --network container:blog sullo/nikto \
                         -h http://localhost:3000/ \
-                        -maxtime 15m \
+                        -maxtime 5m \
                         -nointeractive > nikto-report.txt || true
                 '''
                 sh 'cat nikto-report.txt'
