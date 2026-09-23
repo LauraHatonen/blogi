@@ -18,7 +18,7 @@ pipeline {
     stage('Nikto') {
     steps {
         // Ajetaan Nikto Docker-kontissa Trivy-esimerkin mukaisesti
-        sh 'docker run --rm hackllc/nikto:latest -h http://blog:80'
+        sh 'docker run --rm hackllc/nikto:sha-e108110 -h http://blog:80'
     }
 }
         stage('Run') {
