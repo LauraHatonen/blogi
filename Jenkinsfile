@@ -6,6 +6,13 @@ pipeline {
                 sh 'git pull origin main'
             }
         }
+        stage('OWASP Dependency-Check') {
+            steps {
+                dependencyCheck additionalArguments: '--scan ./ --out ./ --format XML --format HTML --data /var/jenkins_home/dependency-check-data --nvdApiDelay 10000', odcInstallation: 'DP-Check'
+                sh 'ls -la'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'docker build --pull --rm -f "Dockerfile" -t blog:latest "."'
