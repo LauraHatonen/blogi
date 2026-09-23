@@ -35,3 +35,6 @@ stage('Nikto') {
                 archiveArtifacts artifacts: 'nikto-report.txt', allowEmptyArchive: true
             }
         }
+    }
+}
+
