@@ -16,7 +16,7 @@ pipeline {
                 sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity HIGH,CRITICAL blog:latest'
             }
         }
-stage('Nikto') {
+        stage('Nikto') {
     steps {
         // Ajetaan Nikto Docker-kontissa Trivy-esimerkin mukaisesti
         sh 'docker run --rm hackllc/nikto:sha-e108110 -h http://blog:80'
