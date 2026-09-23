@@ -31,4 +31,4 @@ stage('Nikto') {
                 sh 'docker run --rm --link blog:blog hackllc/nikto:latest -h http://blog:3000/ || true'
             }
         }
-    }
+
