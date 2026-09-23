@@ -11,16 +11,15 @@ pipeline {
                 sh 'docker build --pull --rm -f "Dockerfile" -t blog:latest "."'
             }
         }
-       stage('Trivy') {
-}
-        stage('Nikto') {
+        stage('Trivy') {
             steps {
-                // Odotetaan 5 sekuntia, että blog-sovellus ehtii käynnistyä
-                sh 'sleep 5'
-                // Suoritetaan Nikto-skannaus haluamallasi Docker-kuvalla
-                sh 'docker run --rm --link blog:blog hackllc/nikto:sha-e108110 -h http://blog:3000/ || true'
+                sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --severity HIGH,CRITICAL blog:latest'
             }
         }
+stage('Nikto') {
+    steps {
+        // Ajetaan Nikto Docker-kontissa Trivy-esimerkin mukaisesti
+        sh 'docker run --rm sullo/nikto:latest -h http://blog:80'
     }
 }
         stage('Run') {
