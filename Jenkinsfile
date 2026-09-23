@@ -15,7 +15,6 @@ pipeline {
     steps {
         sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --timeout 15m --severity HIGH,CRITICAL blog:latest'
     }
-} 
     stage('Nikto') {
     steps {
         // Ajetaan Nikto Docker-kontissa Trivy-esimerkin mukaisesti
