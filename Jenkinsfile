@@ -24,7 +24,7 @@ pipeline {
             }
         }
 stage('Nikto') {
-            steps { sleep 10}
+            steps {'sleep 10'}
                  sh '''
                     docker run --rm --network container:blog sullo/nikto \
                         -h http://localhost:3000/ \
