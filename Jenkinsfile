@@ -25,10 +25,11 @@ pipeline {
         }
     }
 
-stage('Nikto') {
-            steps {
-                sh 'sleep 10'
-                sh 'docker run --rm --link blog:blog hackllc/nikto:latest -h http://blog:3000/ || true'
-            }
-        }
+}
+        stage('Nikto') {
+    steps {
+        // Ajetaan Nikto Docker-kontissa Trivy-esimerkin mukaisesti
+        sh 'docker run --rm hackllc/nikto:latest -h http://blog/'
+    }
+}
 
