@@ -24,11 +24,10 @@ pipeline {
             }
         }
     }
-stage('Nikto') {
+}
+        stage('Nikto') {
     steps {
-        // Annetaan sovellukselle 10 sekuntia aikaa käynnistyä
-        sh 'sleep 10'
-        // Ajetaan Nikto nopeammalla tuning-asetuksella (-Tuning 1x eli vain mielenkiintoiset tiedostot/aukot)
-        sh 'docker run --rm --link blog:blog hackllc/nikto:sha-e108110 -h http://blog:3000/ -Tuning 1x || true'
+        // Ajetaan Nikto Docker-kontissa Trivy-esimerkin mukaisesti
+        sh 'docker run --rm hackllc/nikto:latest -h http://blog/'
     }
 }
