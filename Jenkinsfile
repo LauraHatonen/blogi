@@ -16,15 +16,12 @@ pipeline {
         sh 'docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:latest image --timeout 15m --severity HIGH,CRITICAL blog:latest'
     }
 } 
-    stage('Nikto Security Scan') {
-            steps {
-                script {
-                    // Run Nikto and save the output as an XML report
-                    sh 'nikto -h http://your-target-url.local -o nikto-report.xml -Format xml || true'
-                }
-            }
-        }
+    stage('Nikto') {
+    steps {
+        // Ajetaan Nikto Docker-kontissa Trivy-esimerkin mukaisesti
+        sh 'docker run --rm sullo/nikto:latest -h http://blog:80'
     }
+}
         stage('Run') {
             steps {
                 sh 'docker stop blog || true'
