@@ -24,7 +24,7 @@ pipeline {
             }
         }
     }
-
+}
 stage('Nikto') {
             steps { sleep 10}
                  sh '''
@@ -36,5 +36,5 @@ stage('Nikto') {
                 sh 'cat nikto-report.txt'
                 archiveArtifacts artifacts: 'nikto-report.txt', allowEmptyArchive: true
             }
-        }
+        
 
