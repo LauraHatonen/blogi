@@ -11,6 +11,12 @@ pipeline {
                 sh 'docker build --pull --rm -f "Dockerfile" -t blog:latest "."'
             }
         }
+          stage('Trivy Security Scan') {
+            steps {
+                // Skannaa rakennetun blog:latest -kuvan haavoittuvuudet
+                sh 'trivy image --severity HIGH,CRITICAL blog:latest'
+            }
+        }
         stage('Run') {
             steps {
                 sh 'docker stop blog || true'
