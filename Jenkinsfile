@@ -25,9 +25,8 @@ pipeline {
         }
     }
 
-}
 stage('Nikto') {
-            steps {
+            steps { sleep 10}
                  sh '''
                     docker run --rm --network container:blog sullo/nikto \
                         -h http://localhost:3000/ \
@@ -38,4 +37,4 @@ stage('Nikto') {
                 archiveArtifacts artifacts: 'nikto-report.txt', allowEmptyArchive: true
             }
         }
-    
+
