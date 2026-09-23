@@ -31,10 +31,11 @@ stage('Nikto') {
                  sh '''
                     docker run --rm --network container:blog sullo/nikto \
                         -h http://localhost:3000/ \
-                        -maxtime 5m \
+                        -maxtime 15m \
                         -nointeractive > nikto-report.txt || true
                 '''
                 sh 'cat nikto-report.txt'
                 archiveArtifacts artifacts: 'nikto-report.txt', allowEmptyArchive: true
             }
         }
+    
