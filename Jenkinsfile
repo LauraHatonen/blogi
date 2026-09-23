@@ -11,9 +11,9 @@ pipeline {
                 sh 'docker build --pull --rm -f "Dockerfile" -t blog:latest "."'
             }
         }
-          stage('Trivy Security Scan') {
+        stage('Trivy Security Scan') {
             steps {
-                // Skannaa rakennetun blog:latest -kuvan haavoittuvuudet
+                // Skannaa juuri rakennettu blog:latest -Docker-kuva
                 sh 'trivy image --severity HIGH,CRITICAL blog:latest'
             }
         }
