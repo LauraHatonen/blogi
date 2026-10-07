@@ -84,7 +84,7 @@ test("A non-admin user cannot reach /admin by sending a forged role cookie", asy
     expect(res.status).toBe(403);
     expect(res.text).toBe('Access denied');
 });
-// Defect 6 - plain-text passwords (CWE-256)
+// Defect 3 - plain-text passwords (CWE-256)
 test("Registration does not store the password in plain text", async () => {
     const password = 'secret123';
 
